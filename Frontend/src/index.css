@@ -1,0 +1,103 @@
+@import url("https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .hero-bg-color {
+        @apply bg-gradient-to-tr from-customGray to-customColor2 dark:from-gray-900 dark:to-gray-800 dark:text-white;
+    }
+}
+/* body {
+  @apply bg-gray-100 flex items-center justify-center h-screen m-0 font-sans;
+} */
+
+.card {
+    /* @apply relative w-72 cursor-pointer border-b-4 rounded-md h-44 text-center px-3 py-7 self-end duration-500 delay-100; */
+    
+        /* Set white background color for the card */
+        @apply relative w-72 cursor-pointer border-b-4 rounded-md bg-white h-44 text-center px-3 py-7 self-end duration-500 delay-100;
+        /* Set black text color */
+        @apply text-black;
+      
+      
+}
+
+.card-active {
+    @apply h-96;
+}
+
+.logo {
+    @apply text-5xl mt-2 max-w-[5rem] min-w-[5rem] min-h-[5rem] rounded-full grid place-items-center;
+}
+
+.para {
+    @apply mt-3;
+}
+
+.card .skill-level {
+    @apply border-2 border-gray-200 text-white min-w-[3rem] min-h-[3rem] grid place-items-center rounded-full max-w-[3rem] absolute -right-2.5;
+}
+
+.card-active .skill-level {
+    @apply scale-[1.3] delay-700 duration-300;
+}
+
+.btn,
+.join {
+  background: linear-gradient(90.35deg, #2563eb 0.36%, #f0e0f3 201.02%);
+}
+
+.active {
+  right: 0;
+}
+
+.h1 {
+  background: linear-gradient(89.83deg, #2563eb 0.11%, #e2cde5 58.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 84px;
+  letter-spacing: 0.02em;
+}
+
+.card {
+  /* Set custom background color for the card */
+  background-color: #93c5fd; /* Light blue background */
+  box-shadow: 0px 22px 18px rgba(0, 0, 0, 0.05);
+  border-radius: 34px;
+}
+
+/* contact section */
+.contact .container {
+  background: linear-gradient(
+    180deg,
+    rgba(254, 254, 255, 0.0145) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow: 0px 22px 18px rgba(0, 0, 0, 0.05);
+  border-radius: 34px;
+}
+.input {
+  background: linear-gradient(
+    180deg,
+    rgba(254, 254, 255, 0.0348) 0%,
+    rgba(255, 255, 255, 0.048) 100%
+  );
+  box-shadow: 10px 24px 54px rgba(0, 0, 0, 0.07);
+  border-radius: 70px;
+}
+
+/* footer */
+.footer{
+  color: #FFFFFFCC;
+}
+.slick-slide > div{
+  margin: 0 10px;
+}
