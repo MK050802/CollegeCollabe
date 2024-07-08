@@ -1,9 +1,9 @@
 
 import asyncHandler from "express-async-handler";
 import generateToken from '../utils/generateToken.js';
-import User from "../models/userModel.js"
+import User from "../models/userModel.js";
 
-const registerUser= asyncHandler(async (req,res) => {
+const registerUser = asyncHandler(async (req,res) => {
      const {name,email,password,confirmPassword}=req.body;
      const user = await User.create({
           name,
@@ -25,6 +25,16 @@ const registerUser= asyncHandler(async (req,res) => {
           res.status(400);
           throw new Error("Error Occured!");
      }
+});
+
+const loginUser = asyncHandler(async(req,res) => {
+       const {email,password} = req.body;
+       
+       const user = await User.findOne({email,password});
+
+
+       
+
 });
  
 
