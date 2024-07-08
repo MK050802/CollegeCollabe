@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPeople from "./pages/SearchPeople";
 import Registration from "./pages/Auth/Registration";
 import AdminLogin from "./pages/Auth/AdminLogin";
+import ShareNotes from "./pages/ShareNotes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="SearchPeople" element={<SearchPeople />} />
       <Route path="Registration" element={<Registration />} />
       <Route path="AdminLogin" element={<AdminLogin />} />
+      <Route path="ShareNotes" element={<ShareNotes />} />
     </Route>
   )
 );

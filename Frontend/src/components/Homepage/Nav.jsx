@@ -13,7 +13,7 @@ const Nav = () => {
     { name: "SEARCH PEOPLE", link: "/SearchPeople" },
     { name: "CHAT BOX", link: "/contact" },
     { name: "NOTES", link: "/NotesAndPyq" },
-    { name: "SHARE NOTES", link: "/notes" },
+    { name: "SHARE NOTES", link: "/ShareNotes" },
     { name: "JOBS/INTERNSHIP", link: "/JobAndIntern" },
     { name: "ABOUT US", link: "/aboutUs" },
   ];

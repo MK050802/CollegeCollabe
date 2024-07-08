@@ -50,7 +50,7 @@ const Services = () => {
       title: "Share Notes",
       description: "Share and access notes to help you study more effectively.",
       borderColor: "border-slate-50",
-      link: "/Share Notes",
+      link: "/ShareNotes",
     },
     {
       icon: <FaStickyNote />,
