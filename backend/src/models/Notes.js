@@ -2,15 +2,19 @@ import { Schema, model } from 'mongoose';
 
 const NoteSchema = new Schema(
   {
-    title: {
+    college: {
       type: String,
       required: true,
     },
-    content: {
+    branch: {
       type: String,
       required: true,
     },
-    category: {
+    subjectCode: {
+      type: String,
+      required: true,
+    },
+    filePath: {
       type: String,
       required: true,
     },
