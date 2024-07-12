@@ -2,8 +2,6 @@ import asyncHandler from "express-async-handler";
 import Note from "../models/Notes.js";
 
 const NotesController = asyncHandler(async (req, res) => {
-  console.log(req.body);
-  console.log(req.file); // This should contain the uploaded file
   try {
     const { college, branch, subjectCode } = req.body;
     const newNote = await Note.create({
@@ -21,4 +19,15 @@ const NotesController = asyncHandler(async (req, res) => {
   }
 });
 
-export default NotesController;
+const getAllNotesController = asyncHandler(async (req, res) => {
+  try {
+    const notes = await Note.find({});
+    res.json(notes);
+  } catch (error) {
+    console.error("Error getting notes:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+export { NotesController, getAllNotesController };
