@@ -14,7 +14,12 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPeople from "./pages/SearchPeople";
 import Registration from "./pages/Auth/Registration";
 import AdminLogin from "./pages/Auth/AdminLogin";
+
 import ShareNotes from "./pages/ShareNotes";
+import Reviews from "./components/ReviewsSection/Reviews";
+import ReviewDetails from "./components/ReviewsSection/ReviewDetails";
+// import UserDetailsForm from "./pages/Auth/UserDetailsForm";
+// import ReviewFormPage from "./components/ReviewsSection/ReviewFormPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,7 +32,13 @@ const router = createBrowserRouter(
       <Route path="SearchPeople" element={<SearchPeople />} />
       <Route path="Registration" element={<Registration />} />
       <Route path="AdminLogin" element={<AdminLogin />} />
+
       <Route path="ShareNotes" element={<ShareNotes />} />
+      <Route path="/" element={<Reviews />} />
+      {/* <Route path="profile" element={<UserDetailsForm />} /> */}
+
+      <Route path="review-details" element={<ReviewDetails />} />
+      {/* <Route path="add-review" element={<ReviewFormPage />} /> */}
     </Route>
   )
 );
