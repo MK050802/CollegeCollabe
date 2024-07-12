@@ -13,7 +13,7 @@ router.post("/CreateNotes", protect, upload.single("file"), (req, res) => {
   NotesController(req, res);
 });
 
-router.get("/GetAllNotes", protect, getAllNotesController);
+router.get("/GetAllNotes",protect,  getAllNotesController);
 
 export default router;
 
