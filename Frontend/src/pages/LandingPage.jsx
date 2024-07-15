@@ -3,9 +3,12 @@ import React from "react";
 import Nav from "../components/Homepage/Nav";
 import Hero from "../components/Hero/Hero";
 import Reviews from "../components/ReviewsSection/Reviews";
+import Review from "../components/newsSection/Reviews";
 import Services from "../components/Services/Services";
 import UserStats from "./UserStats";
 import Footer from "./Footer/Footer";
+
+// import PhotoUpload from "../components/newsSection/PhotoUpload";
 
 const LandingPage = () => {
   return (
@@ -13,6 +16,9 @@ const LandingPage = () => {
       <Nav />
       <Hero />
       <Services />
+      {/* <PhotoUpload /> */}
+
+      <Review />
       <Reviews />
       <UserStats />
       <Footer />
