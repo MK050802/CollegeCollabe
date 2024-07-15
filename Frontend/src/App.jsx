@@ -19,8 +19,8 @@ import AdminLogin from "./pages/Auth/AdminLogin";
 import ShareNotes from "./pages/ShareNotes";
 import Reviews from "./components/ReviewsSection/Reviews";
 import ReviewDetails from "./components/ReviewsSection/ReviewDetails";
-// import UserDetailsForm from "./pages/Auth/UserDetailsForm";
-// import ReviewFormPage from "./components/ReviewsSection/ReviewFormPage";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
