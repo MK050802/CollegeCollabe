@@ -9,9 +9,7 @@ import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/CreateNotes", protect, upload.single("file"), (req, res) => {
-  NotesController(req, res);
-});
+router.post("/CreateNotes", protect, upload.single("file"),NotesController);
 
 router.get("/GetAllNotes",protect,  getAllNotesController);
 
