@@ -6,7 +6,7 @@ import authRoutes from "./src/routes/authRoutes.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import notesRoute from "./src/routes/notesRoutes.js";
-import profileRoutes from "./src/routes/profileRoutes.js";
+import profileroute from "./src/routes/profileRoutes.js"
 
 // Configure environment
 dotenv.config();
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoute);
-app.use("/api/profile",profileRoutes);
+app.use("/api/profile", profileroute);
 
 // Port
 const PORT = process.env.PORT || 5000;
