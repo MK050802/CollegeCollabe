@@ -7,8 +7,7 @@ const NewsController = asyncHandler (async (req,res)=>{
         const news= await News.create({
             name,
             review,
-            imgURL: req.imgURL.path,
-
+            imgURL: req.file.path,
      });
         await news.save();
         res.status(201).json({message:"news posted successfully"});
