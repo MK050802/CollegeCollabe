@@ -141,8 +141,7 @@ const Nav = () => {
                       ></path>
                     </svg>
 
-                    {/* <a href="/ProfilePage">Profile</a> */}
-                    <a href="/profileDetails">Profile</a>
+                     <a href="/ProfilePage">Profile</a> 
                   </li>
 
                   <li className="flex gap-2 items-center">
