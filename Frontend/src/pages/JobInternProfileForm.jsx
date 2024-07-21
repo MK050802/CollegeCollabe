@@ -8,6 +8,7 @@ const JobUploadForm = () => {
     workMode: "",
     duration: "",
     stipend: "",
+    link: "",
   });
 
   const handleChange = (e) => {
@@ -32,14 +33,27 @@ const JobUploadForm = () => {
         </h2>
 
         <div className="mb-4 py-1">
-          <input
-            type="text"
-            name="jobType"
-            value={formData.jobType}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded"
-            placeholder="Enter job/intern type"
-          />
+          <label className="block mb-2 font-medium">Job/Intern Type:</label>
+          <div className="flex items-center mb-2">
+            <input
+              type="radio"
+              name="jobType"
+              value="Job"
+              checked={formData.jobType === "Job"}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label className="mr-4">Job</label>
+            <input
+              type="radio"
+              name="jobType"
+              value="Intern"
+              checked={formData.jobType === "Intern"}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label>Intern</label>
+          </div>
         </div>
 
         <div className="mb-4 py-1">
@@ -49,7 +63,7 @@ const JobUploadForm = () => {
             value={formData.companyType}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded"
-            placeholder="Enter type of company"
+            placeholder="Enter type of company (exp. SDE)"
           />
         </div>
 
@@ -65,14 +79,27 @@ const JobUploadForm = () => {
         </div>
 
         <div className="mb-4 py-1">
-          <input
-            type="text"
-            name="workMode"
-            value={formData.workMode}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded"
-            placeholder="Enter work mode (e.g., remote, onsite)"
-          />
+          <label className="block mb-2 font-medium">Work Mode:</label>
+          <div className="flex items-center mb-2">
+            <input
+              type="radio"
+              name="workMode"
+              value="Remote"
+              checked={formData.workMode === "Remote"}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label className="mr-4">Remote</label>
+            <input
+              type="radio"
+              name="workMode"
+              value="Onsite"
+              checked={formData.workMode === "Onsite"}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label>Onsite</label>
+          </div>
         </div>
 
         <div className="mb-4 py-1">
@@ -94,6 +121,17 @@ const JobUploadForm = () => {
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded"
             placeholder="Enter stipend amount"
+          />
+        </div>
+
+        <div className="mb-4 py-1">
+          <input
+            type="text"
+            name="link"
+            value={formData.link}
+            onChange={handleChange}
+            className="mt-1 p-2 w-full border rounded"
+            placeholder="Enter link of the Job/Intern Update"
           />
         </div>
 
