@@ -14,7 +14,8 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPeople from "./pages/SearchPeople";
 import Registration from "./pages/Auth/Registration";
 import AdminLogin from "./pages/Auth/AdminLogin";
-
+import AdminProfilePage from "./pages/adminProfilePage";
+import JobUploadForm from "./pages/JobInternProfileForm";
 import ShareNotes from "./pages/ShareNotes";
 import Reviews from "./components/ReviewsSection/Reviews";
 import ReviewDetails from "./components/ReviewsSection/ReviewDetails";
@@ -32,6 +33,8 @@ const router = createBrowserRouter(
       <Route path="SearchPeople" element={<SearchPeople />} />
       <Route path="Registration" element={<Registration />} />
       <Route path="AdminLogin" element={<AdminLogin />} />
+      <Route path="JobAndInternForm" element={<JobUploadForm/>}/>
+      <Route path="AdminPage" element={<AdminProfilePage/>}/>
       <Route path="ShareNotes" element={<ShareNotes />} />
       <Route path="review-details" element={<ReviewDetails />} />
     </Route>

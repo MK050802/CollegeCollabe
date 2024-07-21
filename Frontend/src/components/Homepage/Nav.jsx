@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import { Outlet, NavLink, useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { Outlet, NavLink, useNavigate } from "react-router-dom"; 
 import "./Button";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate function
-
-  // Links for the navigation bar
+  const navigate = useNavigate();
   const Links = [
     { name: "HOME", link: "/" },
     { name: "SEARCH PEOPLE", link: "/SearchPeople" },
@@ -18,12 +16,10 @@ const Nav = () => {
     { name: "ABOUT US", link: "/aboutUs" },
   ];
 
-  // Function to handle dropdown item clicks
-  const handleDropdownClick = (path) => {
+const handleDropdownClick = (path) => {
     navigate(path);
-    setOpen(false); // Close the menu after navigation
+    setOpen(false); 
   };
-
   return (
     <>
       <div className="shadow-md w-full h-20 fixed top-0 left-0 z-10 rounded-2xl text-black border-b-2 ">
@@ -60,6 +56,7 @@ const Nav = () => {
               </li>
             ))}
           </ul>
+
           {/* Login/Signup Dropdown */}
           <div className="relative">
             <details className="group">
@@ -98,6 +95,14 @@ const Nav = () => {
               </article>
             </details>
           </div>
+          <button
+            className="bg-orange-500 px-2 py-2 border rounded text-white"
+            onClick={() => {
+              navigate("/AdminPage");
+            }}
+          >
+            Admin Dashboard
+          </button>
           {/* User Profile Dropdown */}
           <div className="relative">
             <details className="group">
@@ -141,7 +146,7 @@ const Nav = () => {
                       ></path>
                     </svg>
 
-                     <a href="/ProfilePage">Profile</a> 
+                    <a href="/ProfilePage">Profile</a>
                   </li>
 
                   <li className="flex gap-2 items-center">
