@@ -12,6 +12,7 @@ import {
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 function JobAndIntern() {
+  
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
     // getAll() is a method provided by the URLSearchParams object that retrieves all values associated with a specific query parameter.

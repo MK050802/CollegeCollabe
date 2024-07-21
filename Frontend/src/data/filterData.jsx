@@ -1,6 +1,6 @@
 export const filters = [
   {
-    id: "job /eIntern",
+    id: "job /Intern",
     name: "Job/Intern",
     options: [
       { value: "job", label: "Job" },
@@ -8,16 +8,18 @@ export const filters = [
     ],
   },
   {
-    id: "department",
-    name: "Department",
+    id: "CompanyType",
+    name: "CompanyType",
     options: [
-      { value: "ece", lable: "ECE" },
-      { value: "cs", label: "CS" },
-      { value: "it", label: "IT" },
-      { value: "ee", label: "EE" },
-      { value: "me", label: "ME" },
-      { value: "ce", label: "CE" },
-      { value: "ai/ml", label: "IT" },
+      { value: "SDE", label: "SDE" },
+      { value: "Web Development", label: "Web Development" },
+      { value: "Flutter Developement", label: "Flutter Development" },
+      { value: "Android Development", label: "Android Development" },
+      { value: "React Native", label: "React Native" },
+      { value: "Data Analyst", label: "Data Analyst" },
+      { value: "DevOps ", label: "DevOps" },
+      { value: "AI/ML", label: " AI/ML" },
+      { value: "UI/UX", label: "UI/UX" },
     ],
   },
   {
