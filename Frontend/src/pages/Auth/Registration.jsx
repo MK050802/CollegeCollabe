@@ -71,10 +71,10 @@ function Registration() {
   };
 
   useEffect(() => {
-    if (registerUserInfo || loginUserInfo) {
+    if ( loginUserInfo) {
       navigate("/");
     }
-  }, [registerUserInfo, loginUserInfo, history]);
+  }, [ loginUserInfo, history]);
 
   return (
     <div className="outerContainer">

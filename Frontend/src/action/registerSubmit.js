@@ -1,4 +1,5 @@
 import { registrationStart, registrationSuccess, registrationFailure } from "../Slices/registerReducer.js";
+import { loginSuccess } from "../Slices/loginReducer.js";
 import axios from "axios"; 
 
 export const registerSubmit =
@@ -18,7 +19,6 @@ export const registerSubmit =
         config
       );
 
-      console.log(data);
       dispatch(registrationSuccess(data));
       dispatch(loginSuccess(data));
       localStorage.setItem("userInfo", JSON.stringify(data));

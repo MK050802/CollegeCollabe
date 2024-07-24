@@ -20,7 +20,7 @@ export const userLoginSlice = createSlice({
       (state.loading = false), (state.error = action.payload);
     },
     userLogOut(state) {
-      state.userInfo = [];
+      state.userInfo = null;
     },
   },
 });
