@@ -5,10 +5,10 @@ const initialState = {
   error: null,
   userInfo: null,
 };
+
 export const userRegisterSlice = createSlice({
   name: "userRegistration",
   initialState,
-
   reducers: {
     registrationStart(state) {
       (state.loading = true), (state.error = null);

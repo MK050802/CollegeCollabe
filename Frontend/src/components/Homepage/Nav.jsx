@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import { Outlet, NavLink, useNavigate } from "react-router-dom"; 
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "./Button";
 
 const Nav = () => {
@@ -16,10 +16,11 @@ const Nav = () => {
     { name: "ABOUT US", link: "/aboutUs" },
   ];
 
-const handleDropdownClick = (path) => {
+  const handleDropdownClick = (path) => {
     navigate(path);
-    setOpen(false); 
+    setOpen(false);
   };
+
   return (
     <>
       <div className="shadow-md w-full h-20 fixed top-0 left-0 z-10 rounded-2xl text-black border-b-2 ">
@@ -60,7 +61,7 @@ const handleDropdownClick = (path) => {
           {/* Login/Signup Dropdown */}
           <div className="relative">
             <details className="group">
-              <summary className="flex items-center justify-center gap-2 p-2 font-medium marker:content-none hover:cursor-pointer px-2 py-2 hover:bg-orange-400 rounded-lg  text-white">
+              <summary className="flex items-center justify-center gap-2 px-2 py-2 hover:bg-orange-400 rounded-lg text-white font-bold text-base cursor-pointer">
                 Login/Signup
                 <svg
                   className="w-5 h-5 text-white transition group-open:rotate-90"
@@ -79,14 +80,13 @@ const handleDropdownClick = (path) => {
               <article className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-10">
                 <ul className="flex flex-col gap-4 p-4">
                   <li
-                    className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-orange-400  "
+                    className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-orange-400 rounded-lg"
                     onClick={() => handleDropdownClick("/Registration")}
                   >
                     User
                   </li>
                   <li
-                    className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-orange-400 rounded-lg "
-                    // Add the path for admin later
+                    className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-orange-400 rounded-lg"
                     onClick={() => handleDropdownClick("/AdminLogin")}
                   >
                     Admin
@@ -106,7 +106,7 @@ const handleDropdownClick = (path) => {
           {/* User Profile Dropdown */}
           <div className="relative">
             <details className="group">
-              <summary className="flex items-center justify-center gap-2 p-2 font-medium marker:content-none hover:cursor-pointer ">
+              <summary className="flex items-center justify-center gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
                 <span className="flex gap-2 ">
                   <img
                     className="w-14 h-14 rounded-full"
@@ -161,10 +161,11 @@ const handleDropdownClick = (path) => {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                        d="M15.75 9V5.25m0 0H12M15.75 5.25L19.5 9m-3.75-3.75L21 12m-1.5 0H15.75M9 15.75V19.5m0 0H5.25M9 19.5l-3.75-3.75M9 19.5L3 15.75m0 0V12"
                       ></path>
                     </svg>
-                    <a href="http://127.0.0.1:8000/user/notes">Notes</a>
+
+                    <a href="/NotesAndPyq">Notes</a>
                   </li>
 
                   <li className="flex gap-2 items-center">
@@ -182,7 +183,8 @@ const handleDropdownClick = (path) => {
                         d="M15.75 9V5.25m0 0H12M15.75 5.25L19.5 9m-3.75-3.75L21 12m-1.5 0H15.75M9 15.75V19.5m0 0H5.25M9 19.5l-3.75-3.75M9 19.5L3 15.75m0 0V12"
                       ></path>
                     </svg>
-                    <a href="http://127.0.0.1:8000/user/resources">Resources</a>
+
+                    <a href="/Resources">Resources</a>
                   </li>
 
                   <li className="flex gap-2 items-center">
@@ -200,7 +202,8 @@ const handleDropdownClick = (path) => {
                         d="M12 15v2.25m0 0v1.5m0-1.5h-1.5m1.5 0h1.5m3.75-8.25V7.5A2.25 2.25 0 0013.5 5.25h-3A2.25 2.25 0 008.25 7.5v.75m0 0H5.25A2.25 2.25 0 003 10.5v9A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75v-9a2.25 2.25 0 00-2.25-2.25h-3m-10.5 0v-.75m0 0A2.25 2.25 0 017.5 3h3a2.25 2.25 0 012.25 2.25v.75M6.75 9.75h10.5a.75.75 0 01.75.75v8.25a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V10.5a.75.75 0 01.75-.75z"
                       ></path>
                     </svg>
-                    <a href="http://127.0.0.1:8000/user/logout">Logout</a>
+
+                    <a href="/Logout">Logout</a>
                   </li>
                 </ul>
               </article>

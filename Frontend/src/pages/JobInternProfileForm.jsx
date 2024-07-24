@@ -11,19 +11,20 @@ const JobUploadForm = () => {
     link: "",
   });
 
+  const [x,setX] = useState(0);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission (e.g., send data to backend)
     console.log(formData);
   };
 
-  return (
-    <div className="min-h-screen bg-sky-600 flex items-center justify-center p-6 mt-10">
+ return (
+    <div className="h-screen bg-sky-600 flex items-center justify-center p-6 mt-20 mb-12">
       <form
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
         onSubmit={handleSubmit}
@@ -31,7 +32,7 @@ const JobUploadForm = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">
           Upload Job/Intern Details
         </h2>
-
+    <div>x</div>
         <div className="mb-4 py-1">
           <label className="block mb-2 font-medium">Job/Intern Type:</label>
           <div className="flex items-center mb-2">
@@ -146,4 +147,4 @@ const JobUploadForm = () => {
   );
 };
 
-export default JobUploadForm;
+export default JobUploadForm ; 
