@@ -155,6 +155,7 @@ const NotesAndPyq = () => {
   const [branchNote, setBranchNote] = useState([]);
   const [subNote, setSubNote] = useState([]);
 
+
   useEffect(() => {
     const coll = [...new Set(notes.map((note) => note.College))];
     setUniqueColleges(coll);
@@ -186,6 +187,7 @@ const NotesAndPyq = () => {
     <div className="flex flex-col bg-gradient-to-r min-h-screen w-screen justify-center items-center mt-20">
       <div className="flex flex-col items-center">
         {/* header name  */}
+
         <div className="text-white text-5xl pl-10 pt-6 w-auto inline-block mb-2 font-bold ">
           <span className="text-orange-500">Notes</span>
           <span> & </span>
@@ -267,6 +269,7 @@ const NotesAndPyq = () => {
             </select>
           </div>
         </div>
+
       </div>
       <div className="mt-20 ml-52 ">
         {college && !branch && !subject

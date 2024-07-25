@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import notesRoute from "./src/routes/notesRoutes.js";
 import profileroute from "./src/routes/profileRoutes.js";
 import newsRoutes from "./src/routes/newsRoutes.js";
+import jobRoutes from "./src/routes/jobRoutes.js";
 
 
 // Configure environment
@@ -32,6 +33,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoute);
 app.use("/api/profile", profileroute);
 app.use("/api/news",newsRoutes);
+app.use("/api/job",jobRoutes);
+
 
 // Port
 const PORT = process.env.PORT || 5000;

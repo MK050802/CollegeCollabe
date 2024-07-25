@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const NewsSchema = new mongoose.Schema(
     {
         name:{

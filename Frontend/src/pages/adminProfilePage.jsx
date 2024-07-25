@@ -16,7 +16,7 @@ const AdminProfilePage = () => {
             navigate('/JobAndInternForm');
           }}
         >
-          Admin Dashboard
+         Job/Intern Upload
         </button>
       </section>
     </div>
