@@ -1,29 +1,44 @@
 import asyncHandler from "express-async-handler";
-import generateToken from '../utils/generateToken.js';
-import User from "../models/userModel.js"
+import generateToken from "../utils/generateToken.js";
+import User from "../models/userModel.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password} = req.body;
+
+
+  const { name, email, password } = req.body;
 
   try {
-     
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(409).json({ message: "User already exists" });
     }
+
     const user = await User.create({
       name,
       email,
-      password
+      password,
     });
 
     if (user) {
+      const token = generateToken(user._id);
+
+      // Set the cookie and send the response
+     res.cookie("token", token, {
+     httpOnly: true,
+     secure: process.env.NODE_ENV === "production", 
+     sameSite: "None", 
+     maxAge: 24 * 60 * 60 * 1000, 
+     });
+
       res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
-        token: generateToken(user._id),
+        token: token, 
       });
     } else {
       res.status(400);
@@ -41,11 +56,21 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
+    const token = generateToken(user._id);
+
+    // Set the cookie and send the response
+     res.cookie("token", token, {
+       httpOnly: true,
+       secure: process.env.NODE_ENV === "production",
+       sameSite: "None",
+       maxAge: 24 * 60 * 60 * 1000,
+     });
+
     res.json({
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
+      token: token, // Include the token in the response payload if needed
     });
   } else {
     res.status(400);

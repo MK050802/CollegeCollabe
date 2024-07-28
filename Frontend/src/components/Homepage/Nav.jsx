@@ -26,17 +26,13 @@ const Nav = () => {
     setOpen(false);
   };
  
-  console.log(userInfo);
-
-const profileLogOut = () => {
-  console.log('ashish');
+  const profileLogOut = () => {
   dispatch(userLogOut());
   localStorage.removeItem("userInfo"); 
-  console.log(userInfo);
   navigate("/");
-};
+  };
 
-  return (
+return (
     <>
       <div className="shadow-md w-full h-20 fixed top-0 left-0 z-10 rounded-2xl text-black border-b-2 ">
         <div className="md:flex items-center justify-between bg-gradient-to-r from-blue-600 to-indigo-800 py-4 md:px-10 px-4 h-20">
@@ -87,7 +83,7 @@ const profileLogOut = () => {
                 Admin Dashboard
               </button>
             ) : (
-              <div className="relative">
+              <div className="relative"> 
                 <details className="group">
                   <summary className="flex items-center justify-center gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
                     <span className="flex gap-2 ">
@@ -130,44 +126,6 @@ const profileLogOut = () => {
                         </svg>
 
                         <a href="/ProfilePage">Profile</a>
-                      </li>
-
-                      <li className="flex gap-2 items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 9V5.25m0 0H12M15.75 5.25L19.5 9m-3.75-3.75L21 12m-1.5 0H15.75M9 15.75V19.5m0 0H5.25M9 19.5l-3.75-3.75M9 19.5L3 15.75m0 0V12"
-                          ></path>
-                        </svg>
-
-                        <a href="/NotesAndPyq">Notes</a>
-                      </li>
-
-                      <li className="flex gap-2 items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 9V5.25m0 0H12M15.75 5.25L19.5 9m-3.75-3.75L21 12m-1.5 0H15.75M9 15.75V19.5m0 0H5.25M9 19.5l-3.75-3.75M9 19.5L3 15.75m0 0V12"
-                          ></path>
-                        </svg>
-
-                        <a href="/Resources">Resources</a>
                       </li>
 
                       <li

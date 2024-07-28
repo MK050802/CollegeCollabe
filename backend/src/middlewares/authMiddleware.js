@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
+
 const protect = async (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = req.cookies.token;
 
   if (!token) return res.status(401).json({ message: "Access Denied" });
-
+  
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-password");
