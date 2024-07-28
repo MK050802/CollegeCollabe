@@ -9,7 +9,9 @@ import notesRoute from "./src/routes/notesRoutes.js";
 import profileroute from "./src/routes/profileRoutes.js";
 import newsRoutes from "./src/routes/newsRoutes.js";
 import jobRoutes from "./src/routes/jobRoutes.js";
+import cookieParser from "cookie-parser";
 
+const app = express();
 
 // Configure environment
 dotenv.config();
@@ -17,24 +19,37 @@ dotenv.config();
 // Database configuration
 connectDB();
 
-const app = express();
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "https://www.College_Collab.com"
+      : "http://localhost:5173",
+  credentials: true,
+};
 
-// Middlewares
-app.use((error,req,res,next) => {
-   const message = `This is the unexpected field -> ${error.field} `;
-   return res.status(500).send(message);
-});
-app.use(cors());
+// Middleware setup
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoute);
 app.use("/api/profile", profileroute);
-app.use("/api/news",newsRoutes);
-app.use("/api/job",jobRoutes);
+app.use("/api/news", newsRoutes);
+app.use("/api/job", jobRoutes);
 
+// Error handling middleware
+app.use((error, req, res, next) => {
+  // Ensure error.field is defined to avoid errors in the message
+  const message = error.field
+    ? `This is the unexpected field -> ${error.field}`
+    : "An unexpected error occurred";
+  return res.status(500).send(message);
+});
 
 // Port
 const PORT = process.env.PORT || 5000;

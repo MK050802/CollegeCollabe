@@ -14,6 +14,7 @@ function Registration() {
     password: "",
     confirmPassword: "",
   });
+  
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -74,7 +75,7 @@ function Registration() {
     if ( loginUserInfo) {
       navigate("/");
     }
-  }, [ loginUserInfo, history]);
+  }, [ loginUserInfo, navigate]);
 
   return (
     <div className="outerContainer">

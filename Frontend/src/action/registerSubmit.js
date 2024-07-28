@@ -16,6 +16,7 @@ export const registerSubmit =
       const { data } = await axios.post(
         "http://localhost:5000/api/auth",
         { name, email, password, confirmPassword },
+        { withCredentials: true },
         config
       );
 
