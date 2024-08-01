@@ -1,7 +1,11 @@
 // src/components/NoteSharePage.js
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import Registration from "./Auth/Registration";
 
 function ShareNotes() {
+  const { userInfo } = useSelector((state) => state.userLogin);
+
   const [formData, setFormData] = useState({
     college: "",
     branch: "",
@@ -30,7 +34,7 @@ function ShareNotes() {
     console.log(formData);
   };
 
-  return (
+  return userInfo ? (
     <div className="min-h-screen bg-sky-600 flex items-center justify-center p-4 mt-6">
       <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-bold mb-6 text-center">
@@ -118,6 +122,8 @@ function ShareNotes() {
         </form>
       </div>
     </div>
+  ) : (
+    <Registration />
   );
 }
 

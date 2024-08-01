@@ -2,11 +2,11 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
 const registerUser = asyncHandler(async (req, res) => {
-
 
   const { name, email, password } = req.body;
 
@@ -78,4 +78,17 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser };
+const logoutUser = asyncHandler(async(req,res)=>{
+          try {
+            // Clear the authentication token from the client
+            res.clearCookie("token");
+
+            // Send a success response
+            res.status(200).json({ message: "Logout successful" });
+          } catch (error) {
+            console.error("Logout error:", error);
+            res.status(500).json({ message: "Internal Server Error" });
+          }
+})
+
+export { registerUser, loginUser,logoutUser };

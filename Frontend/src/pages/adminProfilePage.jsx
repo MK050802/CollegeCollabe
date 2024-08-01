@@ -1,15 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { userLogOut } from "../Slices/loginReducer";
+import { logout } from "../action/logout";
 
 const AdminProfilePage = () => {
   const navigate = useNavigate();
   const dispatch  = useDispatch();
 
   const logoutAdmin = ()=> {
-     dispatch(userLogOut());
-     localStorage.removeItem("userInfo");
+     dispatch(logout());
      navigate("/");
   }
 

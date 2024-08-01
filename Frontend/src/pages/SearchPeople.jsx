@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import arya from "./images/arya.jpg"
+import { useSelector } from "react-redux";
+import Registration from "./Auth/Registration";
 
 const SearchComponent = () => {
+
+  const {userInfo} = useSelector((state) => state.userLogin);
   const [query, setQuery] = useState("");
   const people = [
     {
@@ -81,6 +85,7 @@ const SearchComponent = () => {
   });
 
   return (
+    userInfo?
     <div className="min-h-screen flex items-center justify-center mt-24 bg-sky-600">
       <div className="bg-white p-8  rounded shadow-md w-full max-w-3xl">
         <h1 className="text-2xl font-bold mb-4">Search People</h1>
@@ -112,6 +117,9 @@ const SearchComponent = () => {
         </ul>
       </div>
     </div>
+    :
+    <Registration/>
+
   );
 };
 
