@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const Services = () => {
   const navigate = useNavigate();
-
+  
   const services = [
     {
       icon: <FaBriefcase />,

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import NotesPage from "../components/NotesPage";
+import { useSelector } from "react-redux";
+import Registration from "./Auth/Registration";
 
 const NotesAndPyq = () => {
+
+   const { userInfo } = useSelector((state) => state.userLogin);
+
   const notes = [
     {
       College: "NIT Kurukshetra",
@@ -184,6 +189,7 @@ const NotesAndPyq = () => {
   }, [college, branch, subject]);
 
   return (
+    userInfo?
     <div className="flex flex-col bg-gradient-to-r min-h-screen w-screen justify-center items-center mt-20">
       <div className="flex flex-col items-center">
         {/* header name  */}
@@ -288,6 +294,8 @@ const NotesAndPyq = () => {
             })}
       </div>
     </div>
+    :
+    <Registration/>
   );
 };
 

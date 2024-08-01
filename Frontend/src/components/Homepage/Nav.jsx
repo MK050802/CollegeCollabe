@@ -3,7 +3,7 @@ import "../../App.css";
 import { Outlet, NavLink, useNavigate, useInRouterContext } from "react-router-dom";
 import "./Button";
 import { useDispatch,useSelector } from "react-redux";
-import { userLogOut } from "../../Slices/loginReducer";
+import { logout } from "../../action/logout";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
@@ -27,9 +27,8 @@ const Nav = () => {
   };
  
   const profileLogOut = () => {
-  dispatch(userLogOut());
-  localStorage.removeItem("userInfo"); 
-  navigate("/");
+      dispatch(logout());
+      navigate("/"); 
   };
 
 return (
