@@ -14,4 +14,3 @@ router.post("/CreateNotes", protect, upload.single("file"),NotesController);
 router.get("/GetAllNotes",protect,  getAllNotesController);
 
 export default router;
-

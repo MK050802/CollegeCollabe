@@ -3,13 +3,14 @@ import Note from "../models/Notes.js";
 
 const NotesController = asyncHandler(async (req, res) => {
   try {
+ 
     const { college, branch, subjectCode } = req.body;
     const newNote = await Note.create({
       college,
       branch,
       subjectCode,
       user: req.user._id,
-      filePath: req.file.path,
+      filePath: req.file ? req.file.path : "No file uploaded",
     });
     await newNote.save();
     res.status(201).json({ message: "File uploaded successfully" });
@@ -29,5 +30,4 @@ const getAllNotesController = asyncHandler(async (req, res) => {
   }
 });
 
-
-export { NotesController, getAllNotesController };
+export { NotesController, getAllNotesController }; 

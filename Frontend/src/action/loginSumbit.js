@@ -20,7 +20,7 @@ export const loginSubmit = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-
+    
     dispatch(loginSuccess(data));
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {

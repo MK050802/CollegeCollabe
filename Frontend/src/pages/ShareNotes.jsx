@@ -1,10 +1,15 @@
 // src/components/NoteSharePage.js
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Registration from "./Auth/Registration";
+import { uploadNote } from "../action/getAllNotes";
+import { useNavigate } from "react-router-dom";
 
 function ShareNotes() {
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { loading } = useSelector((state) => state.noteUpload);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     college: "",
@@ -28,11 +33,17 @@ function ShareNotes() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const formDataToSend = {
+    college: formData.college,
+    branch: formData.branch,
+    subject: formData.subject,
+    file: formData.file,
   };
+
+  dispatch(uploadNote(formDataToSend));
+};
 
   return userInfo ? (
     <div className="min-h-screen bg-sky-600 flex items-center justify-center p-4 mt-6">
@@ -40,7 +51,7 @@ function ShareNotes() {
         <h2 className="text-2xl font-bold mb-6 text-center">
           Share Your Notes
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form encType="multipart/form-data">
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -115,6 +126,7 @@ function ShareNotes() {
             <button
               type="submit"
               className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-400 focus:outline-none focus:ring focus:ring-indigo-200"
+              onClick={handleSubmit}
             >
               Share Notes
             </button>

@@ -1,155 +1,158 @@
 import React, { useEffect, useState } from "react";
 import NotesPage from "../components/NotesPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Registration from "./Auth/Registration";
+import { fetchAllNotes } from "../action/getAllNotes";
 
 const NotesAndPyq = () => {
 
-   const { userInfo } = useSelector((state) => state.userLogin);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const {loading,notes,error} = useSelector((state) => state.notes);
+  const dispatch = useDispatch(); 
 
-  const notes = [
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPC-40",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPP-4",
-      type: "pyq",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPP-4",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPP-4",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPP-4",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPP-4",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CS-21",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CS-21",
-      type: "pyq",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CS-21",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CS-40",
-      type: "pyq",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CS-30",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPC-40",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPC-40",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPC-40",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "ECPC-40",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ME",
-      Subject: "ME-33",
-      type: "notes",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "ECE",
-      Subject: "PHIR-11",
-      type: "pyq",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CS",
-      Subject: "CSIR-11",
-      type: "pyq",
-    },
-    {
-      College: "NIT Kurukshetra",
-      Branch: "CE",
-      Subject: "CE-22",
-      type: "notes",
-    },
-    {
-      College: "NIT Jamshedpur",
-      Branch: "IT",
-      Subject: "IT-32",
-      type: "notes",
-    },
-    {
-      College: "NIT Jamshedpur",
-      Branch: "ECE",
-      Subject: "ECPE-35",
-    },
-    {
-      College: "NIT Jamshedpur",
-      Branch: "CS",
-      Subject: "ECPE-35",
-    },
-    {
-      College: "IIT-BHU",
-      Branch: "IT",
-      Subject: "ECPE-35",
-    },
-    {
-      College: "IIT-BHU",
-      Branch: "CS",
-      Subject: "ECPE-35",
-    },
-  ];
-
+  // const notes = [
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPC-40",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPP-4",
+  //     type: "pyq",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPP-4",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPP-4",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPP-4",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPP-4",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CS-21",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CS-21",
+  //     type: "pyq",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CS-21",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CS-40",
+  //     type: "pyq",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CS-30",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPC-40",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPC-40",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPC-40",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "ECPC-40",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ME",
+  //     Subject: "ME-33",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "ECE",
+  //     Subject: "PHIR-11",
+  //     type: "pyq",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CS",
+  //     Subject: "CSIR-11",
+  //     type: "pyq",
+  //   },
+  //   {
+  //     College: "NIT Kurukshetra",
+  //     Branch: "CE",
+  //     Subject: "CE-22",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Jamshedpur",
+  //     Branch: "IT",
+  //     Subject: "IT-32",
+  //     type: "notes",
+  //   },
+  //   {
+  //     College: "NIT Jamshedpur",
+  //     Branch: "ECE",
+  //     Subject: "ECPE-35",
+  //   },
+  //   {
+  //     College: "NIT Jamshedpur",
+  //     Branch: "CS",
+  //     Subject: "ECPE-35",
+  //   },
+  //   {
+  //     College: "IIT-BHU",
+  //     Branch: "IT",
+  //     Subject: "ECPE-35",
+  //   },
+  //   {
+  //     College: "IIT-BHU",
+  //     Branch: "CS",
+  //     Subject: "ECPE-35",
+  //   },
+  // ];
+ 
   const [college, setCollege] = useState("");
   const [branch, setBranch] = useState("");
   const [subject, setSubject] = useState("");
@@ -160,7 +163,10 @@ const NotesAndPyq = () => {
   const [branchNote, setBranchNote] = useState([]);
   const [subNote, setSubNote] = useState([]);
 
-
+  useEffect(() => {
+     dispatch(fetchAllNotes);
+  },[dispatch])
+  
   useEffect(() => {
     const coll = [...new Set(notes.map((note) => note.College))];
     setUniqueColleges(coll);
