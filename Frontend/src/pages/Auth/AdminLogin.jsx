@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginSubmit } from "../../action/loginSumbit";
 
 
-const AdminLogin = () => {
+const AdminLogin = () => { 
 
   const [formData, setFormData] = useState({
     email: "",

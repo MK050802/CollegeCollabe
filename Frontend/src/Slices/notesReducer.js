@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const notesSlice = createSlice ({
+const notesSlice = createSlice({
   name: "notes",
   initialState: {
     loading: false,
     notes: [],
     error: null,
   },
-
   reducers: {
     getAllNotesStart(state) {
       state.loading = true;
@@ -23,6 +22,6 @@ const notesSlice = createSlice ({
   },
 });
 
-export const { getAllNotesStart, getAllNotesSuccess, getAllNotesFailure } = notesSlice.actions;
-
-export default notesSlice.reducer;  
+export const { getAllNotesStart, getAllNotesSuccess, getAllNotesFailure } =
+  notesSlice.actions;
+export default notesSlice.reducer;

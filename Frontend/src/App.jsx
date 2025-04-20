@@ -21,7 +21,6 @@ import Reviews from "./components/ReviewsSection/Reviews";
 import ReviewDetails from "./components/ReviewsSection/ReviewDetails";
 import { Provider } from "react-redux";
 import store from "./store";
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Nav />}>
@@ -48,5 +47,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
-
+export default App; 

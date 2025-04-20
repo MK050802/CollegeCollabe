@@ -3,7 +3,6 @@ import Note from "../models/Notes.js";
 
 const NotesController = asyncHandler(async (req, res) => {
   try {
- 
     const { college, branch, subjectCode } = req.body;
     const newNote = await Note.create({
       college,

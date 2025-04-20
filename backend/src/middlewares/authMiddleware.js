@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
-const protect = async (req, res, next) => {
+const protect = async (req, res, next) => { 
   let token;
   
   if (req.cookies.token) {
@@ -10,7 +10,7 @@ const protect = async (req, res, next) => {
   } else if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
   }
-
+  
  if (token) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -24,7 +24,6 @@ const protect = async (req, res, next) => {
 } else {
   console.error("No token found");
   res.status(401).json({ message: "Not authorized, no token" });
-  console.log("Ashish Yadav");
 }
 };
 

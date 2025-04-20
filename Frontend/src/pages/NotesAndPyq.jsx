@@ -5,12 +5,13 @@ import Registration from "./Auth/Registration";
 import { fetchAllNotes } from "../action/getAllNotes";
 
 const NotesAndPyq = () => {
-
+  
   const { userInfo } = useSelector((state) => state.userLogin);
-  const {loading,notes,error} = useSelector((state) => state.notes);
+  const {notes} = useSelector((state) => state.notes);
   const dispatch = useDispatch(); 
 
   // const notes = [
+
   //   {
   //     College: "NIT Kurukshetra",
   //     Branch: "ECE",
@@ -152,7 +153,6 @@ const NotesAndPyq = () => {
   //     Subject: "ECPE-35",
   //   },
   // ];
- 
   const [college, setCollege] = useState("");
   const [branch, setBranch] = useState("");
   const [subject, setSubject] = useState("");
@@ -163,14 +163,30 @@ const NotesAndPyq = () => {
   const [branchNote, setBranchNote] = useState([]);
   const [subNote, setSubNote] = useState([]);
 
-  useEffect(() => {
-     dispatch(fetchAllNotes);
-  },[dispatch])
+  const downloadFile = (filename) => {
+    const downloadUrl = `/download/${filename}`;
+    window.open(downloadUrl, "_blank");
+  };
+
+ useEffect(() => {
+   dispatch(fetchAllNotes());
+ }, [dispatch]);
+
   
-  useEffect(() => {
-    const coll = [...new Set(notes.map((note) => note.College))];
-    setUniqueColleges(coll);
-  }, []);
+  // useEffect(() => {
+  //   const fetchNotes = async () => {
+  //     try {
+  //       const response = await axios.get("/api/notes/GetAllNotes");
+  //       setNotes(response.data);
+
+  //       const coll = [...new Set(response.data.map((note) => note.College))];
+  //       setUniqueColleges(coll);
+  //     } catch (error) {
+  //       console.error("Error fetching notes:", error);
+  //     }
+  //   };
+  //   fetchNotes();
+  // }, []);
 
   useEffect(() => {
     const b = notes.filter((note) => note.College === college);
@@ -286,17 +302,35 @@ const NotesAndPyq = () => {
       <div className="mt-20 ml-52 ">
         {college && !branch && !subject
           ? collNote.map((coll) => {
-              return <NotesPage type={coll.type} x={coll.College} />;
+              return (
+                <NotesPage
+                  type={coll.type}
+                  x={coll.College}
+                  onClick = {() => downloadFile(coll.filename)}
+                />
+              );
             })
           : college && branch && !subject
           ? branchNote.map((coll) => {
-              return <NotesPage type={coll.type} x={coll.Branch} />;
+              return (
+                <NotesPage
+                  type={coll.type}
+                  x={coll.Branch}
+                  onClick = {() => downloadFile(coll.filename)}
+                />
+              )
             })
           : college &&
             branch &&
             subject &&
             subNote.map((coll) => {
-              return <NotesPage type={coll.type} x={coll.Subject} />;
+              return (
+                <NotesPage
+                  type={coll.type}
+                  x={coll.Subject}
+                  onClick = {() => downloadFile(coll.filename)}
+                />
+              );
             })}
       </div>
     </div>

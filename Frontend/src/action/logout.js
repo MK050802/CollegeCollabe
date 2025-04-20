@@ -4,7 +4,7 @@ import axios from "axios";
 export const logout = () => async (dispatch) => {
   try {
     await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      "http://localhost:5001/api/auth/logout",
       {},
       {
         withCredentials: true,

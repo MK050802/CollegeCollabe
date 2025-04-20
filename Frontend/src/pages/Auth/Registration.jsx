@@ -23,7 +23,6 @@ function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Extract state slices with unique names
   const {
     loading: registerLoading,
     error: registerError,
@@ -61,7 +60,7 @@ function Registration() {
       console.log("Passwords do not match");
       return;
     }
-
+   console.log("babu");
     dispatch(registerSubmit(name, email, password));
   };
 
@@ -77,7 +76,7 @@ function Registration() {
     }
   }, [ loginUserInfo, navigate]);
 
-  return (
+  return ( 
     <div className="outerContainer">
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>

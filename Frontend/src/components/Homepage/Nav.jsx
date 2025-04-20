@@ -11,7 +11,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   const  {userInfo} = useSelector((state)=>state.userLogin);
-  const Links = [
+  const Links = [ 
     { name: "HOME", link: "/" },
     { name: "SEARCH PEOPLE", link: "/SearchPeople" },
     { name: "CHAT BOX", link: "/contact" },
@@ -39,7 +39,7 @@ return (
             <span className="text-2xl text-white rounded-full mr-1 pt-1">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
-            ShareIT
+            CollegeCollabe
           </div>
 
           <div
@@ -71,8 +71,8 @@ return (
           {/* Login/Signup Dropdown */}
           {/* User Profile Dropdown */}
           {userInfo ? (
-            userInfo.email === "yashishkumar996@gmail.com" ||
-            userInfo.email === "megha834004@gmail.com" ? (
+            userInfo.email === "yashishkumar996@gmai.com" ||
+            userInfo.email === "megha834004@gmai.com" ? (
               <button
                 className="bg-orange-500 px-2 py-2 border rounded text-white"
                 onClick={() => {
