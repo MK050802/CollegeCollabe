@@ -10,8 +10,6 @@ import protect from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.post("/CreateNotes", protect, upload.single("file"),NotesController);
+router.get("/GetAllNotes", getAllNotesController);
 
-router.get("/GetAllNotes",protect,  getAllNotesController);
-
-export default router;
-
+export default router; 

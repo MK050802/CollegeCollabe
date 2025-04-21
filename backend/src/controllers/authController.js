@@ -1,8 +1,7 @@
-import asyncHandler from "express-async-handler";
+import asyncHandler from "express-async-handler"; 
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (userExists) {
       return res.status(409).json({ message: "User already exists" });
     }
-
+    
     const user = await User.create({
       name,
       email,
@@ -27,12 +26,12 @@ const registerUser = asyncHandler(async (req, res) => {
       const token = generateToken(user._id);
 
       // Set the cookie and send the response
-     res.cookie("token", token, {
-     httpOnly: true,
-     secure: process.env.NODE_ENV === "production", 
-     sameSite: "None", 
-     maxAge: 24 * 60 * 60 * 1000, 
-     });
+      res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production" ,
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", 
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
 
       res.status(201).json({
         _id: user._id,
@@ -56,15 +55,15 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     // Set the cookie and send the response
-     res.cookie("token", token, {
-       httpOnly: true,
-       secure: process.env.NODE_ENV === "production",
-       sameSite: "None",
-       maxAge: 24 * 60 * 60 * 1000,
-     });
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // Only set 'secure' to true in production
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-site in production, 'Lax' for local development
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+});
 
     res.json({
       _id: user.id,
@@ -81,8 +80,12 @@ const loginUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async(req,res)=>{
           try {
             // Clear the authentication token from the client
-            res.clearCookie("token");
-
+           res.clearCookie("token", {
+             httpOnly: true,
+             secure: process.env.NODE_ENV === "production",
+             sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+           });
+           
             // Send a success response
             res.status(200).json({ message: "Logout successful" });
           } catch (error) {

@@ -19,6 +19,9 @@ import JobUploadForm from "./pages/JobInternProfileForm";
 import ShareNotes from "./pages/ShareNotes";
 import Reviews from "./components/ReviewsSection/Reviews";
 import ReviewDetails from "./components/ReviewsSection/ReviewDetails";
+import CompanyReview from "./pages/CompanyReview";
+import ReviewDetail from "./pages/ReviewDetail";
+
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -29,14 +32,16 @@ const router = createBrowserRouter(
       <Route path="aboutUs" element={<AboutUs />} />
       <Route path="JobAndIntern" element={<JobAndIntern />} />
       <Route path="NotesAndPyq" element={<NotesAndPyq />} />
-      <Route path="ProfilePage" element={<ProfilePage />} /> 
+      <Route path="ProfilePage" element={<ProfilePage />} />
       <Route path="SearchPeople" element={<SearchPeople />} />
       <Route path="Registration" element={<Registration />} />
       <Route path="AdminLogin" element={<AdminLogin />} />
-      <Route path="JobAndInternForm" element={<JobUploadForm/>}/>
-      <Route path="AdminPage" element={<AdminProfilePage/>}/>
+      <Route path="JobAndInternForm" element={<JobUploadForm />} />
+      <Route path="AdminPage" element={<AdminProfilePage />} />
       <Route path="ShareNotes" element={<ShareNotes />} />
       <Route path="review-details" element={<ReviewDetails />} />
+      <Route path="CompanyReview" element={<CompanyReview />} />
+      <Route path="/review/:id" element={<ReviewDetail/>} />
     </Route>
   )
 );
@@ -48,5 +53,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
-
+export default App; 

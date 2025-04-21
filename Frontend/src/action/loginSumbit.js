@@ -16,11 +16,11 @@ export const loginSubmit = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "http://localhost:5001/api/auth/login",
       { email, password },
       config
     );
-
+    
     dispatch(loginSuccess(data));
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {

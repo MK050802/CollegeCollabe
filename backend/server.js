@@ -29,6 +29,7 @@ const corsOptions = {
 
 // Middleware setup
 app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -51,8 +52,8 @@ app.use((error, req, res, next) => {
   return res.status(500).send(message);
 });
 
-// Port
-const PORT = process.env.PORT || 5000;
+// Port 
+const PORT = process.env.PORT || 6000 ; 
 
 app.listen(PORT, () => {
   console.log(`Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`);
