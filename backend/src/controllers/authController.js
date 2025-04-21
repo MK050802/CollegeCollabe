@@ -28,8 +28,8 @@ const registerUser = asyncHandler(async (req, res) => {
       // Set the cookie and send the response
       res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ,// Only set 'secure' to true in production
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Use 'None' for cross-site in production, 'Lax' for local development
+      secure: process.env.NODE_ENV === "production" ,
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", 
       maxAge: 24 * 60 * 60 * 1000, // 1 day
       });
 
@@ -80,8 +80,12 @@ res.cookie("token", token, {
 const logoutUser = asyncHandler(async(req,res)=>{
           try {
             // Clear the authentication token from the client
-            res.clearCookie("token");
-
+           res.clearCookie("token", {
+             httpOnly: true,
+             secure: process.env.NODE_ENV === "production",
+             sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+           });
+           
             // Send a success response
             res.status(200).json({ message: "Logout successful" });
           } catch (error) {
