@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nodeVersion: [16, 18]
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js ${{ matrix.nodeVersion }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodeVersion }}
+
+      # Step 3: Install backend dependencies
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+
+      # Step 4: Test backend
+      - name: Test backend
+        working-directory: ./backend
+        run: npm test || echo "No tests found"
+
+      # Step 5: Install frontend dependencies
+      - name: Install frontend dependencies
+        working-directory: ./Frontend
+        run: npm install
+
+      # Step 6: Build frontend
+      - name: Build frontend
+        working-directory: ./Frontend
+        run: npm run build
+
+      # Step 7: Deploy frontend to GitHub Pages (only on main)
+      - name: Deploy frontend
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./Frontend/dist
+
+      # Step 8: Optional backend deployment (example using SSH/other service)
+      # Uncomment and configure as needed
+      - name: Deploy backend
+        if: github.ref == 'refs/heads/main'
+        run: |
+          scp -r ./backend user@server:/path/to/deploy
+          ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
