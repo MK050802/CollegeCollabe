@@ -53,10 +53,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./Frontend/dist
 
-      # Step 8: Optional backend deployment (example using SSH/other service)
-      # Uncomment and configure as needed
-      - name: Deploy backend
-        if: github.ref == 'refs/heads/main'
-        run: |
-          scp -r ./backend user@server:/path/to/deploy
-          ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
+      # # Step 8: Optional backend deployment (example using SSH/other service)
+      # # Uncomment and configure as needed
+      # - name: Deploy backend
+      #   if: github.ref == 'refs/heads/main'
+      #   run: |
+      #     scp -r ./backend user@server:/path/to/deploy
+      #     ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
