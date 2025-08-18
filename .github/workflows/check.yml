@@ -51,7 +51,7 @@ jobs:
       - name: Deploy backend
         if: github.ref == 'refs/heads/main'
         run: |
-          scp -r ./backend/* user@server:/path/to/deploy
+          scp -r ./backend/* user@your.actual.server.ip.or.hostname:/path/to/deploy
           ssh  user@server "cd /path/to/deploy && npm install && pm2 restart app"
       # - name: Setup SSH
       #   uses: webfactory/ssh-agent@v0.8.0
