@@ -29,7 +29,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/rootReducer";
 import { thunk } from "redux-thunk";
   // default import, not { thunk }
-
+// import { applyMiddleware } from "@reduxjs/toolkit";
 // Load user info from localStorage
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
