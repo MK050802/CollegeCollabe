@@ -9,54 +9,51 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        nodeVersion: [16, 18]
+
     steps:
       # Step 1: Checkout code
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
-      - name: Setup Node.js ${{ matrix.nodeVersion }}
+      # Step 2: Setup Node.js v20
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.nodeVersion }}
+          node-version: 20
+          cache: 'npm'   # <-- speeds up installs
 
-      # Step 3: Install backend dependencies
+      # ---------- BACKEND ----------
       - name: Install backend dependencies
         working-directory: ./backend
         run: npm install
 
-      # Step 4: Test backend
       - name: Test backend
         working-directory: ./backend
         run: npm test || echo "No tests found"
 
-      # Step 5: Install frontend dependencies
+      # ---------- FRONTEND ----------
       - name: Install frontend dependencies
-        working-directory: ./Frontend
+        working-directory: ./frontend   # lowercase folder
         run: npm install
 
-      # Step 6: Build frontend
       - name: Build frontend
-        working-directory: ./Frontend
+        working-directory: ./frontend
         run: npm run build
 
-      # Step 7: Deploy frontend to GitHub Pages (only on main)
-      - name: Deploy frontend
+      # ---------- DEPLOY FRONTEND ----------
+      - name: Deploy frontend to GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Frontend/dist
+          publish_dir: ./frontend/dist
 
-      # # Step 8: Optional backend deployment (example using SSH/other service)
-      # # Uncomment and configure as needed
+      # ---------- OPTIONAL: DEPLOY BACKEND ----------
+      # Uncomment if you want backend deployment
       # - name: Deploy backend
       #   if: github.ref == 'refs/heads/main'
       #   run: |
-      #     scp -r ./backend user@server:/path/to/deploy
+      #     scp -r ./backend/* user@server:/path/to/deploy
       #     ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
