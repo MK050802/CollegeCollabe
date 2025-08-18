@@ -1,5 +1,4 @@
 name: CI/CD Pipeline
-
 on:
   push:
     branches:
@@ -11,7 +10,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       # Step 1: Checkout code
       - name: Checkout repo
@@ -22,7 +20,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          # cache: 'npm'   # <-- speeds up installs
 
       # ---------- BACKEND ----------
       - name: Install backend dependencies
@@ -35,7 +32,7 @@ jobs:
 
       # ---------- FRONTEND ----------
       - name: Install Frontend dependencies
-        working-directory: ./Frontend   # lowercase folder
+        working-directory: ./Frontend
         run: npm install
 
       - name: Build frontend
@@ -43,15 +40,14 @@ jobs:
         run: npm run build
 
       # ---------- DEPLOY FRONTEND ----------
-      - name: Deploy frontend to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./Frontend/dist
 
       # ---------- OPTIONAL: DEPLOY BACKEND ----------
-      # Uncomment if you want backend deployment
+      # Uncomment below if you want backend deployment
       # - name: Deploy backend
       #   if: github.ref == 'refs/heads/main'
       #   run: |
