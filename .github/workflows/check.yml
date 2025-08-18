@@ -3,24 +3,28 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - '**'      # triggers on push to any branch
+      - main
   pull_request:
     branches:
-      - '**'      # triggers on PRs from any branch
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # Step 1: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
+      # Step 2: Setup Node.js v20
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 20
+          # cache: 'npm'   # <-- speeds up installs
 
+      # ---------- BACKEND ----------
       - name: Install backend dependencies
         working-directory: ./backend
         run: npm install
@@ -29,18 +33,27 @@ jobs:
         working-directory: ./backend
         run: npm test || echo "No tests found"
 
-      - name: Install frontend dependencies
-        working-directory: ./Frontend
+      # ---------- FRONTEND ----------
+      - name: Install Frontend dependencies
+        working-directory: ./Frontend   # lowercase folder
         run: npm install
 
       - name: Build frontend
         working-directory: ./Frontend
         run: npm run build
 
-      # Deploy only when push is on main
-      - name: Deploy frontend
+      # ---------- DEPLOY FRONTEND ----------
+      - name: Deploy frontend to GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./Frontend/dist
+
+      # ---------- OPTIONAL: DEPLOY BACKEND ----------
+      # Uncomment if you want backend deployment
+      # - name: Deploy backend
+      #   if: github.ref == 'refs/heads/main'
+      #   run: |
+      #     scp -r ./backend/* user@server:/path/to/deploy
+      #     ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
