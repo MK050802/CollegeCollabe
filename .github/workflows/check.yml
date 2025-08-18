@@ -1,66 +1,105 @@
-name: CI/CD Pipeline
+# name: CI/CD Pipeline
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Step 1: Checkout code
+#       - name: Checkout repo
+#         uses: actions/checkout@v3
+
+#       # Step 2: Setup Node.js v20
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+
+#       # ---------- BACKEND ----------
+#       - name: Install backend dependencies
+#         working-directory: ./backend
+#         run: npm install
+
+#       - name: Test backend
+#         working-directory: ./backend
+#         run: npm test || echo "No tests found"
+
+#       # ---------- FRONTEND ----------
+#       - name: Install Frontend dependencies
+#         working-directory: ./Frontend
+#         run: npm install
+
+#       - name: Build frontend
+#         working-directory: ./Frontend
+#         run: npm run build
+
+#       # ---------- DEPLOY FRONTEND ----------
+#       - name: Deploy to GitHub Pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GH_PAT }}
+#           publish_dir: ./Frontend/dist
+
+#       # ---------- OPTIONAL: DEPLOY BACKEND ----------
+    
+#       - name: Deploy backend
+#         if: github.ref == 'refs/heads/main'
+#         run: |
+#           scp -r ./backend/* user@your.actual.server.ip.or.hostname:/path/to/deploy
+#           ssh  user@server "cd /path/to/deploy && npm install && pm2 restart app"
+#       # - name: Setup SSH
+#       #   uses: webfactory/ssh-agent@v0.8.0
+#       #   with:
+#       #    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+#       # - name: Deploy backend
+#       #   if: github.ref == 'refs/heads/main'
+#       #   run: |
+#       #      scp -r ./backend/* user@server:/path/to/deploy
+#       #      ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
+
+
+name: Build & Deploy Frontend to GitHub Pages
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+    branches: [ main ]
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      # Step 2: Setup Node.js v20
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      # ---------- BACKEND ----------
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm install
-
-      - name: Test backend
-        working-directory: ./backend
-        run: npm test || echo "No tests found"
-
-      # ---------- FRONTEND ----------
-      - name: Install Frontend dependencies
+          node-version: '20'
+      - name: Install dependencies (frontend)
         working-directory: ./Frontend
         run: npm install
-
       - name: Build frontend
         working-directory: ./Frontend
         run: npm run build
-
-      # ---------- DEPLOY FRONTEND ----------
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload frontend build artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GH_PAT }}
-          publish_dir: ./Frontend/dist
+          path: ./Frontend/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 
-      # ---------- OPTIONAL: DEPLOY BACKEND ----------
-    
-      - name: Deploy backend
-        if: github.ref == 'refs/heads/main'
-        run: |
-          scp -r ./backend/* user@your.actual.server.ip.or.hostname:/path/to/deploy
-          ssh  user@server "cd /path/to/deploy && npm install && pm2 restart app"
-      # - name: Setup SSH
-      #   uses: webfactory/ssh-agent@v0.8.0
-      #   with:
-      #    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # - name: Deploy backend
-      #   if: github.ref == 'refs/heads/main'
-      #   run: |
-      #      scp -r ./backend/* user@server:/path/to/deploy
-      #      ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
 
