@@ -48,19 +48,19 @@ jobs:
 
       # ---------- OPTIONAL: DEPLOY BACKEND ----------
     
-      # - name: Deploy backend
-      #   if: github.ref == 'refs/heads/main'
-      #   run: |
-      #     scp -r ./backend/* user@server:/path/to/deploy
-      #     ssh  user@server "cd /path/to/deploy && npm install && pm2 restart app"
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: Deploy backend
         if: github.ref == 'refs/heads/main'
         run: |
-           scp -r ./backend/* user@server:/path/to/deploy
-           ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
+          scp -r ./backend/* user@server:/path/to/deploy
+          ssh  user@server "cd /path/to/deploy && npm install && pm2 restart app"
+      # - name: Setup SSH
+      #   uses: webfactory/ssh-agent@v0.8.0
+      #   with:
+      #    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # - name: Deploy backend
+      #   if: github.ref == 'refs/heads/main'
+      #   run: |
+      #      scp -r ./backend/* user@server:/path/to/deploy
+      #      ssh user@server "cd /path/to/deploy && npm install && pm2 restart app"
 
