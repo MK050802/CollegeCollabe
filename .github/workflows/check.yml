@@ -34,12 +34,12 @@ jobs:
         run: npm test || echo "No tests found"
 
       # ---------- FRONTEND ----------
-      - name: Install frontend dependencies
-        working-directory: ./frontend   # lowercase folder
+      - name: Install Frontend dependencies
+        working-directory: ./Frontend   # lowercase folder
         run: npm install
 
       - name: Build frontend
-        working-directory: ./frontend
+        working-directory: ./Frontend
         run: npm run build
 
       # ---------- DEPLOY FRONTEND ----------
@@ -48,7 +48,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/dist
+          publish_dir: ./Frontend/dist
 
       # ---------- OPTIONAL: DEPLOY BACKEND ----------
       # Uncomment if you want backend deployment
