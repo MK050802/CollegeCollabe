@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Provider,useDispatch } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { loginSuccess } from "./Slices/loginReducer.js";
 import store from "./store";
 
