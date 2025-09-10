@@ -22,7 +22,7 @@ connectDB();
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://www.College_Collab.com"
+      ? "https://mk050802.github.io/CollegeCollabe/"
       : "http://localhost:5173",
   credentials: true,
 };
